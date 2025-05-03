@@ -1,0 +1,26 @@
+\documentclass[statementpaper,oneside,article,14pt]{memoir}
+\usepackage[
+  marginparsep=0pt,
+  marginparwidth=0pt
+]{geometry}
+\usepackage{datetime2}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\today}
+\chead{\textbf{\Large <%= dice_def %>}}
+\rhead{booklet <%= run_number %>}
+
+\setsecnumdepth{none}
+\maxsecnumdepth{none}
+
+\begin{document}
+\centering
+<% (1..8).each do |page| %>
+  \begin{tabular}{cccccccccc}
+  <% (1..17).each do |row| %>
+    <%= (1..10).map{roll(dice_per_roll, die_sides)}.map(&:to_s).join(" & ") %> \\[8pt]
+  <% end %>
+  \end{tabular}
+  \clearpage
+<% end %>
+\end{document}
